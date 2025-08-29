@@ -1,111 +1,71 @@
-Hosein, [8/29/2025 11:19 PM]
 <!DOCTYPE html>
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>عطر فروشی ایذه</title>
-<!-- لود کردن فونت ایران سانس از CDN -->
-<link href="https://cdn.jsdelivr.net/gh/rastikerdar/iransans@1.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
 <style>
     body {
-        margin: 0;
-        font-family: 'IRANSans', Tahoma, sans-serif;
+        font-family: 'Tahoma', sans-serif;
         background-color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
-        overflow: hidden;
+        height: 100vh;
+        margin: 0;
     }
-
     .container {
         text-align: center;
         width: 90%;
         max-width: 400px;
         padding: 30px;
-        border-radius: 20px;
-        background-color: #fff;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        opacity: 0;
-        transform: translateY(50px);
-        animation: fadeInUp 0.8s forwards;
+        border: 2px solid #ccc;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
-
     input {
         width: 80%;
-        padding: 12px;
+        padding: 10px;
         margin: 10px 0;
-        border-radius: 10px;
+        border-radius: 8px;
         border: 1px solid #ccc;
         font-size: 16px;
-        transition: all 0.3s;
     }
-
-    input:focus {
-        border-color: #ff7f50;
-        box-shadow: 0 0 8px rgba(255,127,80,0.5);
-        outline: none;
-    }
-
     button {
-        padding: 12px 25px;
+        padding: 10px 20px;
         font-size: 16px;
-        border-radius: 12px;
+        border-radius: 8px;
         border: none;
         background-color: #ff7f50;
         color: white;
         cursor: pointer;
-        margin-top: 15px;
-        transition: all 0.3s;
-        display: inline-block;
-        animation: popIn 0.5s ease forwards;
+        margin-top: 10px;
     }
-
     button:hover {
         background-color: #ff6347;
-        transform: scale(1.1) rotate(-2deg);
     }
-
     .hidden {
         display: none;
-    }
-
-    @keyframes fadeInUp {
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes popIn {
-        0% { transform: scale(0.5); opacity: 0; }
-        100% { transform: scale(1); opacity: 1; }
-    }
-
-    .fun-text {
-        margin: 20px 0;
-        font-size: 18px;
-        line-height: 1.6;
-        min-height: 60px;
-        white-space: pre-wrap; /* برای حفظ خطوط */
     }
 </style>
 </head>
 <body>
-
-<!-- صفحه اول -->
 <div class="container" id="step1">
     <h2>سلام! 😄</h2>
-    <p>می‌خوای باهات آشنا بشم! اسم کوچیکت چیه؟</p>
+    <p>می‌خوام باهات آشنا بشم! اول اسم کوچیکت چیه؟</p>
     <input type="text" id="firstname" placeholder="اسم کوچیکت رو وارد کن">
-    <p>و چند سالته؟</p>
-    <input type="number" id="age" placeholder="سن رو وارد کن" min="1">
+    <p>و فامیلت چیه؟</p>
+    <input type="text" id="lastname" placeholder="فامیل رو وارد کن">
     <br>
     <button onclick="nextStep()">بزن بریم 🚀</button>
 </div>
 
-<!-- صفحه دوم -->
 <div class="container hidden" id="step2">
-    <h2 id="greeting"></h2>
-    <p class="fun-text" id="funText"></p>
+    <h2>ایول <span id="displayName"></span>! 😎</h2>
+    <p>من یه عطر فروشی تو ایذه دارم! 🛍️<br>
+       آدرس: خیابان فلان، کوچه فلان 🌸<br>
+       بیا یکمی بامزه باهات شوخی کنیم 😜</p>
+    <p>اگر خواستی عطرای ما رو ببینی و بگیری، روی لینک پایین بزن:</p>
     <a href="https://www.instagram.com/yourpage" target="_blank">
         <button>رفتن به پیج اینستا 📸</button>
     </a>
@@ -114,137 +74,15 @@ Hosein, [8/29/2025 11:19 PM]
 <script>
 function nextStep() {
     const first = document.getElementById('firstname').value.trim();
-    const age = document.getElementById('age').value.trim();
-    if(first === '' || age === '') {
-        alert('هی! هر دو فیلد اسم و سن رو باید پر کنی 😅');
+    const last = document.getElementById('lastname').value.trim();
+    if(first === '' || last === '') {
+        alert('هی! اسم و فامیل رو باید وارد کنی 😅');
         return;
     }
-
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
-
-    // مخفی کردن صفحه اول با انیمیشن
-    step1.style.transition = 'all 0.5s';
-    step1.style.opacity = 0;
-    step1.style.transform = 'translateY(-50px)';
-    
-    setTimeout(() => {
-        step1.classList.add('hidden');
-        step2.classList.remove('hidden');
-        step2.style.animation = 'fadeInUp 0.8s forwards';
-        startTyping(first, age);
-    }, 500);
+    document.getElementById('displayName').textContent = first + ' ' + last;
+    document.getElementById('step1').classList.add('hidden');
+    document.getElementById('step2').classList.remove('hidden');
 }
-
-function startTyping(name, age) {
-    const greeting = document.getElementById('greeting');
-    const funText = document.getElementById('funText');
-
-    greeting.textContent = می‌دونم اسمت چیه: ${name};
-
-    const text = و ${age} سالته! 😎
-وای! این سن و سال با این اسم بامزه 😜
-بیایم یه کمی عطرای خوشبو ببینی و خوش بگذرونیم! 🌸;
-
-Hosein, [8/29/2025 11:59 PM]
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحه تبلیغاتی</title>
-    <!-- لینک فونت ایران سانس -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/iransans@v6.0.0/dist/font-face.css" rel="stylesheet" type="text/css" />
-    <style>
-        body {
-            font-family: 'IRANSans', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f0f8ff;
-            color: #333;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        h1, h2 {
-            color: #1E90FF;
-        }
-        input {
-            width: 250px;
-            padding: 10px 15px;
-            margin: 10px 0;
-            border: 2px solid #1E90FF;
-            border-radius: 15px;
-            font-size: 16px;
-        }
-        .btn {
-            padding: 12px 25px;
-            margin-top: 20px;
-            background-color: #1E90FF;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-        .btn:hover {
-            background-color: #0f70d1;
-        }
-        #page2 {
-            display: none;
-            text-align: center;
-        }
-        a {
-            color: white;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="container" id="page1">
-        <h1>خوش آمدید!</h1>
-        <input type="text" id="username" placeholder="نام خود را وارد کنید">
-        <input type="number" id="age" placeholder="سن خود را وارد کنید">
-        <button class="btn" onclick="goToPage2()">ادامه</button>
-    </div>
-
-    <div class="container" id="page2">
-        <h2 id="greeting"></h2>
-        <p id="message1"></p>
-        <p id="message2"></p>
-        <p id="message3"></p>
-        <a class="btn" href="#" target="_blank" id="instagramLink">لینک اینستاگرام</a>
-    </div>
-
-    <script>
-        function goToPage2() {
-            const username = document.getElementById('username').value.trim();
-            const age = document.getElementById('age').value.trim();
-
-            if(!username || !age){
-                alert("لطفاً نام و سن خود را وارد کنید.");
-                return;
-            }
-
-            document.getElementById('page1').style.display = 'none';
-            document.getElementById('page2').style.display = 'flex';
-
-            // متن‌ها را می‌توان اینجا ویرایش کرد
-            document.getElementById('greeting').textContent = "سلام " + username + "!";
-            document.getElementById('message1').textContent = "یک متن دلخواه اینجا بنویسید.";
-            document.getElementById('message2').textContent = "نام شما: " + username + " و سن شما: " + age;
-            document.getElementById('message3').textContent = "یک متن پایانی اینجا قرار می‌گیرد.";
-
-            // لینک اینستاگرام
-            document.getElementById('instagramLink').href = "https://instagram.com/"; // لینک خودت را جایگزین کن
-        }
-    </script>
+</script>
 </body>
 </html>
