@@ -51,7 +51,7 @@
 </head>
 <body>
 <div class="container" id="step1">
-    <h2>😉سلام! مرسی که منو اسکن کردی! بیا با هم بیشتر آشنا شیم</h2>
+    <h2>!سلام😉 مرسی که منو اسکن کردی! بیا با هم بیشتر آشنا شیم</h2>
     <p>:اسمت رو واسم بنویس</p>
     <input type="text" id="firstname" placeholder="اسم کوچیکت رو وارد کن">
     <p>بگو ببینم چند سالته؟</p>
@@ -61,7 +61,15 @@
 </div>
 
 <div class="container hidden" id="step2">
-    <h2>سلام <span id="displayName"></span>! 😎</h2>
+<h2>سلام <span id="displayName"></span>! 😍</h2>
+
+<script>
+  const firstName = "علی";   // اسم اینجا
+  const lastName = "حسینی";  // فامیلی اینجا
+
+  const displayName = document.getElementById("displayName");
+  displayName.textContent = ${firstName}، میدونم فامیلیت ${lastName} هست;
+</script>
     <p>من یه عطر فروشی تو ایذه دارم! 🛍️<br>
        آدرس: خیابان فلان، کوچه فلان 🌸<br>
        بیا یکمی بامزه باهات شوخی کنیم 😜</p>
